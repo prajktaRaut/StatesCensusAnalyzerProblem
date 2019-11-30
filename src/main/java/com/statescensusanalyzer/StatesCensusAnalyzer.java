@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class StatesCensusAnalyzer {
 
-    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Desktop/StateCode1.csv";
+    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Desktop/StateCode.txt";
 
     public int checkNumberOfRecords() throws  IOException,CSVFileException{
 
@@ -44,7 +44,7 @@ public class StatesCensusAnalyzer {
             }
             catch (NoSuchFileException e)
             {
-                 throw new CSVFileException("Please enter proper file name",CSVFileException.ExceptionType.NO_SUCH_FILE);
+                 throw new CSVFileException("Please enter proper file type",CSVFileException.ExceptionType.NO_SUCH_FILE);
             }
             catch (IOException e)
             {

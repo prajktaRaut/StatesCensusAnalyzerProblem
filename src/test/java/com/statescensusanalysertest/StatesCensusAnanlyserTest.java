@@ -34,4 +34,20 @@ public class StatesCensusAnanlyserTest
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenMethod_ifFoundIncorrectFileType_ShouldThrowException() throws IOException
+    {
+        try
+        {
+            int value = statesCensusAnalyzer.checkNumberOfRecords();
+            Assert.assertEquals(37, value);
+
+        }
+        catch (CSVFileException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }
