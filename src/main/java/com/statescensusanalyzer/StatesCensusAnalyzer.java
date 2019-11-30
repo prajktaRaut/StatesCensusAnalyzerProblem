@@ -9,12 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class StatesCensusAnalyzer {
 
-    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Desktop/StateCode.txt";
+    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
-    public int checkNumberOfRecords() throws  IOException,CSVFileException{
+    public int checkNumberOfRecords() throws IOException, CSVFileException {
 
             int count = 0;
 
@@ -41,6 +42,11 @@ public class StatesCensusAnalyzer {
 
 
                 }
+            }
+            catch (RuntimeException e)
+            {
+                throw new CSVFileException("Exception due to incorrect delimiter position",CSVFileException.ExceptionType.NO_SUCH_FIELD);
+
             }
             catch (NoSuchFileException e)
             {

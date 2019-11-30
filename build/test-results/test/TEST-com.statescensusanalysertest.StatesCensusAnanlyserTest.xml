@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-30T04:52:47" hostname="admin1-desktop" time="0.011">
+<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-30T05:52:58" hostname="admin1-desktop" time="0.03">
   <properties/>
-  <testcase name="givenMethod_ifFoundIncorrectFileType_ShouldThrowException" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.011"/>
+  <testcase name="givenMethod_ifFoundIncorrectDelimiter_ShouldReturnException" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.03"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[com.statescensusanalyzer.CSVFileException: Please enter proper file type
-	at com.statescensusanalyzer.StatesCensusAnalyzer.checkNumberOfRecords(StatesCensusAnalyzer.java:47)
-	at com.statescensusanalysertest.StatesCensusAnanlyserTest.givenMethod_ifFoundIncorrectFileType_ShouldThrowException(StatesCensusAnanlyserTest.java:43)
+  <system-err><![CDATA[com.statescensusanalyzer.CSVFileException: Exception due to incorrect delimiter
+	at com.statescensusanalyzer.StatesCensusAnalyzer.checkNumberOfRecords(StatesCensusAnalyzer.java:48)
+	at com.statescensusanalysertest.StatesCensusAnanlyserTest.givenMethod_ifFoundIncorrectDelimiter_ShouldReturnException(StatesCensusAnanlyserTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class StatesCensusAnanlyserTest
 {
     StatesCensusAnalyzer statesCensusAnalyzer=new StatesCensusAnalyzer();
-    @Test
+   @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
     {
         int value=statesCensusAnalyzer.checkNumberOfRecords();
@@ -49,5 +49,20 @@ public class StatesCensusAnanlyserTest
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenMethod_ifFoundIncorrectDelimiter_ShouldReturnException() throws IOException,CSVFileException
+    {
+            try {
+
+                int value = statesCensusAnalyzer.checkNumberOfRecords();
+                Assert.assertEquals(37, value);
+            }
+             catch (CSVFileException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
