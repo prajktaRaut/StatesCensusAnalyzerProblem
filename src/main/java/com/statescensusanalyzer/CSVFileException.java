@@ -2,12 +2,12 @@ package com.statescensusanalyzer;
 
 public class CSVFileException extends Exception {
 
-    enum ExceptionType{
+    public enum ExceptionType{
 
-        NO_SUCH_FILE,NO_SUCH_FIELD
+        NO_SUCH_FILE,NO_SUCH_FIELD,NO_SUCH_HEADER
     }
 
-    ExceptionType type;
+    public ExceptionType type;
 
     public CSVFileException(String message,ExceptionType type) {
         super(message);

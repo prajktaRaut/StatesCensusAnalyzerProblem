@@ -1,11 +1,12 @@
 package com.statescensusanalyzer;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 
 public class CSVStates {
 
     @CsvBindByName
-    int SrNo;
+    public int SrNo;
 
     @CsvBindByName
     String StateName;

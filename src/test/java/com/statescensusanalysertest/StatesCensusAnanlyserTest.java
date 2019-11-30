@@ -31,7 +31,8 @@ public class StatesCensusAnanlyserTest
         }
         catch (CSVFileException e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
         }
     }
 
@@ -46,11 +47,14 @@ public class StatesCensusAnanlyserTest
         }
         catch (CSVFileException e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
+
         }
     }
+
     @Test
-    public void givenMethod_ifFoundIncorrectDelimiter_ShouldReturnException() throws IOException,CSVFileException
+    public void givenMethod_ifFoundIncorrectDelimiterPosition_ShouldReturnException() throws IOException,CSVFileException
     {
             try {
 
@@ -59,10 +63,26 @@ public class StatesCensusAnanlyserTest
             }
              catch (CSVFileException e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
         }
 
     }
 
+    @Test
+    public void givenMethod_ifFoundNoHeader_ShouldReturnException()
+    {
+        try {
+
+            int value = statesCensusAnalyzer.checkNumberOfRecords();
+            Assert.assertEquals(37, value);
+        }
+        catch (CSVFileException e)
+        {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_HEADER,e.type);
+        }
+
+    }
 
 }
