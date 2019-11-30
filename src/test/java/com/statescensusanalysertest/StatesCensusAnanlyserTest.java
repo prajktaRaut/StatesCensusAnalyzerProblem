@@ -21,7 +21,7 @@ public class StatesCensusAnanlyserTest
     }
 
     @Test
-    public void givenMethod_CheckNumberOfRecordesMatchesOrNot() throws IOException
+    public void givenMethod_ifFoundIncorrectFileName_ShouldThrowException() throws IOException
     {
         try
         {
