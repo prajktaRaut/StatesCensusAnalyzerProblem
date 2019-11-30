@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-29T13:17:14" hostname="admin1-desktop" time="0.123">
+<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-30T04:37:44" hostname="admin1-desktop" time="0.167">
   <properties/>
-  <testcase name="givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.123"/>
+  <testcase name="givenMethod_CheckNumberOfRecordesMatchesOrNot" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.167"/>
   <system-out><![CDATA[SerialNumber :1
 StateName :Andaman and Nicobar Islands
 TIN :35
