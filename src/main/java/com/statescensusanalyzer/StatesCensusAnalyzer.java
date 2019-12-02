@@ -88,7 +88,11 @@ public class StatesCensusAnalyzer {
             }
         catch (NoSuchFileException e){
 
-            throw new CSVFileException("Please enter proper file name",CSVFileException.ExceptionType.NO_SUCH_FILE);
+            if (SAMPLE_CSV_CENSUS_FILE_PATH.contains(".csv"))
+                throw new CSVFileException("Please enter proper file name",CSVFileException.ExceptionType.NO_SUCH_FILE);
+            else if (!SAMPLE_CSV_CENSUS_FILE_PATH.contains(".csv"))
+                throw new CSVFileException("Please enter proper file type",CSVFileException.ExceptionType.NO_SUCH_FILE);
+
         }
 
         catch (IOException e) {
