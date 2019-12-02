@@ -64,7 +64,7 @@ public class StatesCensusAnalyzer {
     }
 
 
-    public int checkNumberOfRecordsForCSVStatesCensus(String SAMPLE_CSV_CENSUS_FILE_PATH ) throws IOException {
+    public int checkNumberOfRecordsForCSVStatesCensus(String SAMPLE_CSV_CENSUS_FILE_PATH ) throws IOException, CSVFileException {
 
         int count = 0;
 
@@ -86,10 +86,15 @@ public class StatesCensusAnalyzer {
 
                 }
             }
+        catch (NoSuchFileException e){
+
+            throw new CSVFileException("Please enter proper file name",CSVFileException.ExceptionType.NO_SUCH_FILE);
+        }
 
         catch (IOException e) {
             e.printStackTrace();
         }
+
 
         return count;
     }
