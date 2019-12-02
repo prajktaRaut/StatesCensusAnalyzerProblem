@@ -2,25 +2,20 @@ package com.statescensusanalyzer;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
+
 
 public class StatesCensusAnalyzer {
 
-    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
-    public int checkNumberOfRecords() throws CSVFileException {
+    public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH ) throws CSVFileException {
 
         int count = 0;
-        String[] columns={};
 
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
@@ -32,9 +27,6 @@ public class StatesCensusAnalyzer {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
-            for (int i=0;i<columns.length;i++) {
-                System.out.println("Columns are "+columns[i]);
-            }
 
             Iterator<CSVStates> iterator = csvToBean.iterator();
 
@@ -70,5 +62,38 @@ public class StatesCensusAnalyzer {
 
         return count;
     }
+
+
+    public int checkNumberOfRecordsForCSVStatesCensus(String SAMPLE_CSV_CENSUS_FILE_PATH ) throws IOException {
+
+        int count = 0;
+
+        try (
+                Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_CENSUS_FILE_PATH));
+
+        ) {
+
+            CsvToBean<CSVStatesCensus> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(CSVStatesCensus.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            Iterator<CSVStatesCensus> iterator=csvToBean.iterator();
+            while (iterator.hasNext()) {
+                count++;
+
+                CSVStatesCensus csvStatesCensus=iterator.next();
+
+                }
+            }
+
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+
 
 }

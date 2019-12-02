@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-30T12:06:11" hostname="admin1-desktop" time="0.052">
+<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-02T04:24:11" hostname="admin1-desktop" time="0.107">
   <properties/>
-  <testcase name="givenMethod_ifFoundNoHeader_ShouldReturnException" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.052"/>
-  <system-out><![CDATA[Exception due to Header
-]]></system-out>
+  <testcase name="givenMethod_CheckNumberOfRecordesMatchesOrNot_ForStatesCensus_ShouldReturnTrue" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.107"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

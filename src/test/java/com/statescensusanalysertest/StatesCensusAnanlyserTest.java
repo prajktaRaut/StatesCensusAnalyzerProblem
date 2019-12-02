@@ -12,11 +12,24 @@ import static org.junit.Assert.assertEquals;
 public class StatesCensusAnanlyserTest
 {
     StatesCensusAnalyzer statesCensusAnalyzer=new StatesCensusAnalyzer();
+
+    private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode123.csv";
+
+    private static final String SAMPLE_CSV_CENSUS_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
+
    @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
     {
-        int value=statesCensusAnalyzer.checkNumberOfRecords();
-        Assert.assertEquals(37,value);
+        try {
+            int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            Assert.assertEquals(37,value);
+        } catch (CSVFileException e)
+        {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
+        }
+
+
 
     }
 
@@ -25,7 +38,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecords();
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -41,7 +54,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecords();
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -58,7 +71,7 @@ public class StatesCensusAnanlyserTest
     {
             try {
 
-                int value = statesCensusAnalyzer.checkNumberOfRecords();
+                int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
                 Assert.assertEquals(37, value);
             }
              catch (CSVFileException e)
@@ -74,7 +87,7 @@ public class StatesCensusAnanlyserTest
     {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecords();
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
         }
         catch (CSVFileException e)
@@ -84,5 +97,21 @@ public class StatesCensusAnanlyserTest
         }
 
     }
+
+    @Test
+    public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ForStatesCensus_ShouldReturnTrue() throws IOException {
+       try {
+
+
+           int count = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+           Assert.assertEquals(29, count);
+
+       }
+       catch (IOException e){
+           e.printStackTrace();
+
+       }
+    }
+
 
 }
