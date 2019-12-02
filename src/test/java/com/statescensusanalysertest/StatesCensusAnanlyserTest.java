@@ -15,7 +15,7 @@ public class StatesCensusAnanlyserTest
 
     private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
-    private static final String SAMPLE_CSV_CENSUS_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.txt";
+    private static final String SAMPLE_CSV_CENSUS_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
 
    @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
@@ -129,6 +129,22 @@ public class StatesCensusAnanlyserTest
             Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
 
         }
+    }
+
+    @Test
+    public void givenMethod_ifFoundIncorrectDelimiterPosition_InStatesCensusFile_ShouldReturnException() throws IOException,CSVFileException
+    {
+        try {
+
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+            Assert.assertEquals(29, value);
+        }
+        catch (CSVFileException e)
+        {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.INVALID_DELIMITER,e.type);
+        }
+
     }
 
 

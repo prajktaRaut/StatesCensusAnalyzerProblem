@@ -94,6 +94,11 @@ public class StatesCensusAnalyzer {
                 throw new CSVFileException("Please enter proper file type",CSVFileException.ExceptionType.NO_SUCH_FILE);
 
         }
+        catch (RuntimeException e){
+
+            throw new CSVFileException("Exception occure due to wrong position of delimiter",CSVFileException.ExceptionType.INVALID_DELIMITER);
+
+        }
 
         catch (IOException e) {
             e.printStackTrace();
