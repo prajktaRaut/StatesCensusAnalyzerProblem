@@ -75,7 +75,7 @@ public class StatesCensusAnanlyserTest
     }
 
     @Test
-    public void givenMethod_ifFoundNoHeader_ShouldReturnException()
+    public void givenMethod_ifFoundIncorrectHeader_ShouldReturnException()
     {
         try {
 
@@ -146,6 +146,22 @@ public class StatesCensusAnanlyserTest
         }
 
     }
+
+    @Test
+    public void givenMethod_ifFoundIncorrectHeader_InStatesCensusFile_ShouldReturnException() throws IOException {
+        try {
+
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+            Assert.assertEquals(37, value);
+        }
+        catch (CSVFileException e)
+        {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_HEADER,e.type);
+        }
+
+    }
+
 
 
 

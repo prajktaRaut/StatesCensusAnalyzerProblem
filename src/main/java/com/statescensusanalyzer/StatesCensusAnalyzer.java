@@ -84,6 +84,13 @@ public class StatesCensusAnalyzer {
 
                 CSVStatesCensus csvStatesCensus=iterator.next();
 
+                if (csvStatesCensus.getState()==null || csvStatesCensus.getPopulation()==null || csvStatesCensus.getAreaInSqKm()==null || csvStatesCensus.getDensityPerSqKm()==null){
+
+                    throw new CSVFileException("Exception due to incorrect Header", CSVFileException.ExceptionType.NO_SUCH_HEADER);
+
+                }
+
+
                 }
             }
         catch (NoSuchFileException e){
