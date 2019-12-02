@@ -1,6 +1,8 @@
 package com.statescensusanalysertest;
 
 import com.statescensusanalyzer.CSVFileException;
+import com.statescensusanalyzer.CSVStates;
+import com.statescensusanalyzer.CSVStatesCensus;
 import com.statescensusanalyzer.StatesCensusAnalyzer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,6 +15,9 @@ public class StatesCensusAnanlyserTest
 {
     StatesCensusAnalyzer statesCensusAnalyzer=new StatesCensusAnalyzer();
 
+    CSVStates csvStates=new CSVStates();
+    CSVStatesCensus csvStatesCensus=new CSVStatesCensus();
+
     private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
     private static final String SAMPLE_CSV_CENSUS_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
@@ -21,7 +26,7 @@ public class StatesCensusAnanlyserTest
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
     {
 
-            int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value=statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37,value);
     }
 
@@ -30,7 +35,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -46,7 +51,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -63,7 +68,7 @@ public class StatesCensusAnanlyserTest
     {
             try {
 
-                int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+                int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
                 Assert.assertEquals(37, value);
             }
              catch (CSVFileException e)
@@ -79,13 +84,13 @@ public class StatesCensusAnanlyserTest
     {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
         }
         catch (CSVFileException e)
         {
             System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_HEADER,e.type);
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
         }
 
     }
@@ -93,7 +98,7 @@ public class StatesCensusAnanlyserTest
     @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ForStatesCensus_ShouldReturnTrue() throws IOException, CSVFileException {
 
-           int count = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+           int count = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
            Assert.assertEquals(29, count);
 
     }
@@ -103,7 +108,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
             Assert.assertEquals(29, value);
 
         }
@@ -119,7 +124,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
             Assert.assertEquals(29, value);
 
         }
@@ -136,13 +141,13 @@ public class StatesCensusAnanlyserTest
     {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
             Assert.assertEquals(29, value);
         }
         catch (CSVFileException e)
         {
             System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.INVALID_DELIMITER,e.type);
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
         }
 
     }
@@ -151,18 +156,16 @@ public class StatesCensusAnanlyserTest
     public void givenMethod_ifFoundIncorrectHeader_InStatesCensusFile_ShouldReturnException() throws IOException {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStatesCensus(SAMPLE_CSV_CENSUS_FILE_PATH);
-            Assert.assertEquals(37, value);
+            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
+            Assert.assertEquals(29, value);
         }
         catch (CSVFileException e)
         {
             System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_HEADER,e.type);
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
         }
 
     }
-
-
 
 
 }
