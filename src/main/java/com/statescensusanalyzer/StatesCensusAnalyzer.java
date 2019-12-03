@@ -16,7 +16,8 @@ import java.util.*;
 public class StatesCensusAnalyzer {
 
 
-    String SAMPLE_GSON_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StatesCensus.json";
+    String SAMPLE_GSON_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByState.json";
+    String SAMPLE_GSON_FILE="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByPopulations.json";
 
     public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH) throws CSVFileException {
 
@@ -45,8 +46,10 @@ public class StatesCensusAnalyzer {
                 list.add(csvStatesCensus);
 
             }
+            sortBYStatesName(list);
+            writeToJson(list,SAMPLE_GSON_FILE_PATH);
             sortBYPopulationsValue(list);
-            writeToJson(list);
+            writeToJson(list,SAMPLE_GSON_FILE);
 
         }
         catch (NoSuchFileException e) {
@@ -89,10 +92,10 @@ public class StatesCensusAnalyzer {
     }
 
 
-    public void writeToJson(List<CSVStatesCensus> statesCensusList) throws IOException {
+    public void writeToJson(List<CSVStatesCensus> statesCensusList,String SAMPLE_FILE_PATH) throws IOException {
         Gson gson=new Gson();
         String json=gson.toJson(statesCensusList);
-        FileWriter fileWriter=new FileWriter(SAMPLE_GSON_FILE_PATH);
+        FileWriter fileWriter=new FileWriter(SAMPLE_FILE_PATH);
         fileWriter.write(json);
         fileWriter.close();
 
