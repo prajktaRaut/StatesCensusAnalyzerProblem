@@ -45,7 +45,7 @@ public class StatesCensusAnalyzer {
                 list.add(csvStatesCensus);
 
             }
-            sortBYStatesName(list);
+            sortBYPopulationsValue(list);
             writeToJson(list);
 
         }
@@ -79,6 +79,15 @@ public class StatesCensusAnalyzer {
         System.out.println(list.toString());
 
     }
+
+    public void sortBYPopulationsValue(List<CSVStatesCensus> list)
+    {
+        Comparator<CSVStatesCensus> comparator=Comparator.comparing(CSVStatesCensus::getPopulation);
+        list.sort(comparator);
+        System.out.println(list.toString());
+
+    }
+
 
     public void writeToJson(List<CSVStatesCensus> statesCensusList) throws IOException {
         Gson gson=new Gson();
