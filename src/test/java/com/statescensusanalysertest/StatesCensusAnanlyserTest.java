@@ -8,26 +8,26 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
 public class StatesCensusAnanlyserTest
 {
-    StatesCensusAnalyzer statesCensusAnalyzer=new StatesCensusAnalyzer();
-
-    CSVStates csvStates=new CSVStates();
-    CSVStatesCensus csvStatesCensus=new CSVStatesCensus();
+   StatesCensusAnalyzer statesCensusAnalyzer=new StatesCensusAnalyzer();
 
     private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
-    private static final String SAMPLE_CSV_CENSUS_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
+    private static final String SAMPLE_CSV_States_Census_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData1.csv";
 
-   @Test
+    @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
     {
 
-            int value=statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
-            Assert.assertEquals(37,value);
+        int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+        Assert.assertEquals(37,value);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -51,7 +51,7 @@ public class StatesCensusAnanlyserTest
     {
         try
         {
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
 
         }
@@ -66,12 +66,12 @@ public class StatesCensusAnanlyserTest
     @Test
     public void givenMethod_ifFoundIncorrectDelimiterPosition_ShouldReturnException() throws IOException,CSVFileException
     {
-            try {
+        try {
 
-                int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
-                Assert.assertEquals(37, value);
-            }
-             catch (CSVFileException e)
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            Assert.assertEquals(37, value);
+        }
+        catch (CSVFileException e)
         {
             System.out.println(e.getMessage());
             Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
@@ -84,88 +84,26 @@ public class StatesCensusAnanlyserTest
     {
         try {
 
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStates,SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
             Assert.assertEquals(37, value);
         }
         catch (CSVFileException e)
         {
             System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_HEADER,e.type);
         }
 
     }
+
 
     @Test
-    public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ForStatesCensus_ShouldReturnTrue() throws IOException, CSVFileException {
+    public void givenMethod_SortDataByStateName_ShouldReturnSortCountEqualsOrNot() throws CSVFileException {
 
-           int count = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
-           Assert.assertEquals(29, count);
+        int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_States_Census_FILE_PATH);
 
+        Assert.assertEquals(29,value);
     }
 
-    @Test
-    public void givenMethod_ifFoundIncorrectName_OfStatesCensusFile_ShouldThrowException() throws IOException
-    {
-        try
-        {
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
-            Assert.assertEquals(29, value);
-
-        }
-        catch (CSVFileException e)
-        {
-            System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
-        }
-    }
-
-    @Test
-    public void givenMethod_ifFoundIncorrectType_OfStatesCensusFile_ShouldThrowException() throws IOException
-    {
-        try
-        {
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
-            Assert.assertEquals(29, value);
-
-        }
-        catch (CSVFileException e)
-        {
-            System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FILE,e.type);
-
-        }
-    }
-
-    @Test
-    public void givenMethod_ifFoundIncorrectDelimiterPosition_InStatesCensusFile_ShouldReturnException() throws IOException,CSVFileException
-    {
-        try {
-
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
-            Assert.assertEquals(29, value);
-        }
-        catch (CSVFileException e)
-        {
-            System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
-        }
-
-    }
-
-    @Test
-    public void givenMethod_ifFoundIncorrectHeader_InStatesCensusFile_ShouldReturnException() throws IOException {
-        try {
-
-            int value = statesCensusAnalyzer.openCSVBuilder(csvStatesCensus,SAMPLE_CSV_CENSUS_FILE_PATH);
-            Assert.assertEquals(29, value);
-        }
-        catch (CSVFileException e)
-        {
-            System.out.println(e.getMessage());
-            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCH_FIELD,e.type);
-        }
-
-    }
 
 
 }

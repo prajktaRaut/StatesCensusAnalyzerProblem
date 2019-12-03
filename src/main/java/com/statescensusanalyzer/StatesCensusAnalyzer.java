@@ -1,67 +1,102 @@
 package com.statescensusanalyzer;
 
+import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.util.Iterator;
+import java.util.*;
 
 
 public class StatesCensusAnalyzer {
 
-    public int openCSVBuilder(Object className,String csvFile) throws CSVFileException {
 
-        int counter=0;
+    String SAMPLE_GSON_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StatesCensus.json";
 
-        Object object=className;
+    public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH) throws CSVFileException {
+
+        int count = 0;
+
+        List<CSVStatesCensus> list=new ArrayList<>();
 
         try (
-                Reader reader = Files.newBufferedReader(Paths.get(csvFile));
+                Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
 
         ) {
 
-            CsvToBean<Object> csvToBean = new CsvToBeanBuilder(reader)
-                    .withType(object.getClass())
+            CsvToBean<CSVStatesCensus> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(CSVStatesCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
+            Iterator<CSVStatesCensus> iterator=csvToBean.iterator();
 
-            Iterator<Object> iterator = csvToBean.iterator();
 
             while (iterator.hasNext()) {
-                counter++;
+                count++;
 
-                Object csvStates = iterator.next();
+                CSVStatesCensus csvStatesCensus = iterator.next();
+
+                list.add(csvStatesCensus);
 
             }
+            sortBYStatesName(list);
+            writeToJson(list);
 
         }
         catch (NoSuchFileException e) {
 
-            if (csvFile.contains(".csv"))
+            if (SAMPLE_CSV_FILE_PATH.contains(".csv"))
 
                 throw new CSVFileException("Please enter proper file name", CSVFileException.ExceptionType.NO_SUCH_FILE);
 
-            else if (!csvFile.contains(".csv"))
+            else if (!SAMPLE_CSV_FILE_PATH.contains(".csv"))
 
                 throw new CSVFileException("Please enter proper file type", CSVFileException.ExceptionType.NO_SUCH_FILE);
 
         }
         catch (RuntimeException e) {
 
-                throw new CSVFileException("Exception Occurs due to incorrect delimiter position or Incorrect Header", CSVFileException.ExceptionType.NO_SUCH_FIELD);
-
-            }
+            throw new CSVFileException("Exception due to incorrect delimiter position", CSVFileException.ExceptionType.NO_SUCH_FIELD);
+        }
         catch (IOException e) {
             e.printStackTrace();
         }
 
-        return counter;
+        return count;
+
+    }
+
+    public void sortBYStatesName(List<CSVStatesCensus> list)
+    {
+        Comparator<CSVStatesCensus> comparator=Comparator.comparing(CSVStatesCensus::getState);
+        list.sort(comparator);
+        System.out.println(list.toString());
+
+    }
+
+    public void writeToJson(List<CSVStatesCensus> statesCensusList) throws IOException {
+        Gson gson=new Gson();
+        String json=gson.toJson(statesCensusList);
+        FileWriter fileWriter=new FileWriter(SAMPLE_GSON_FILE_PATH);
+        fileWriter.write(json);
+        fileWriter.close();
 
     }
 
 
+
+
+
 }
+
+
+
+
+
+

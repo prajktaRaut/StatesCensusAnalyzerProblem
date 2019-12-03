@@ -1,12 +1,11 @@
 package com.statescensusanalyzer;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
 
-public class CSVStates{
+public class StateCensusData {
 
     @CsvBindByName
-    public int SrNo;
+    int SrNo;
 
     @CsvBindByName
     String StateName;
@@ -16,6 +15,12 @@ public class CSVStates{
 
     @CsvBindByName
     String StateCode;
+
+    Double Population;
+
+    Double AreaInSqKm;
+
+    Double DensityPerSqKm;
 
     public int getSrNo() {
         return SrNo;
@@ -47,5 +52,29 @@ public class CSVStates{
 
     public void setStateCode(String stateCode) {
         StateCode = stateCode;
+    }
+
+    public Double getPopulation() {
+        return Population;
+    }
+
+    public void setPopulation(Double population) {
+        Population = population;
+    }
+
+    public Double getAreaInSqKm() {
+        return AreaInSqKm;
+    }
+
+    public void setAreaInSqKm(Double areaInSqKm) {
+        AreaInSqKm = areaInSqKm;
+    }
+
+    public Double getDensityPerSqKm() {
+        return DensityPerSqKm;
+    }
+
+    public void setDensityPerSqKm(Double densityPerSqKm) {
+        DensityPerSqKm = densityPerSqKm;
     }
 }
