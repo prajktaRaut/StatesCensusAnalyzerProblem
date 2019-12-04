@@ -19,6 +19,7 @@ public class StatesCensusAnalyzer {
     String SAMPLE_GSON_STATES_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByState.json";
     String SAMPLE_GSON_POPULATION_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByPopulations.json";
     String SAMPLE_GSON_DENSITY_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByDensity.json";
+    String SAMPLE_GSON_AREA_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByArea.json";
 
     public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH) throws CSVFileException {
 
@@ -53,6 +54,8 @@ public class StatesCensusAnalyzer {
             writeToJson(list,SAMPLE_GSON_POPULATION_FILE_PATH);
             sortDensityValueInDescendingOrder(list);
             writeToJson(list,SAMPLE_GSON_DENSITY_FILE_PATH);
+            sortAreaValueInDescendingOrder(list);
+            writeToJson(list,SAMPLE_GSON_AREA_FILE_PATH);
 
 
         }
@@ -97,8 +100,14 @@ public class StatesCensusAnalyzer {
 
     public void sortDensityValueInDescendingOrder(List<CSVStatesCensus> list)
     {
-        int count=0;
         Comparator<CSVStatesCensus> c = (s1, s2) -> Integer.parseInt(s2.getDensityPerSqKm()) - Integer.parseInt(s1.getDensityPerSqKm());
+        list.sort(c);
+
+    }
+
+    public void sortAreaValueInDescendingOrder(List<CSVStatesCensus> list)
+    {
+        Comparator<CSVStatesCensus> c = (s1, s2) -> Integer.parseInt(s2.getAreaInSqKm()) - Integer.parseInt(s1.getAreaInSqKm());
         list.sort(c);
 
     }
