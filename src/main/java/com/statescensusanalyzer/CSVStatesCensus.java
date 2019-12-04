@@ -8,13 +8,13 @@ public class CSVStatesCensus {
     String State;
 
     @CsvBindByName
-    Double Population;
+    String Population;
 
     @CsvBindByName
-    Double AreaInSqKm;
+    String AreaInSqKm;
 
     @CsvBindByName
-    Double DensityPerSqKm;
+    String DensityPerSqKm;
 
     public String getState() {
         return State;
@@ -24,27 +24,27 @@ public class CSVStatesCensus {
         State = state;
     }
 
-    public Double getPopulation() {
+    public String getPopulation() {
         return Population;
     }
 
-    public void setPopulation(Double population) {
+    public void setPopulation(String population) {
         Population = population;
     }
 
-    public Double getAreaInSqKm() {
+    public String getAreaInSqKm() {
         return AreaInSqKm;
     }
 
-    public void setAreaInSqKm(Double areaInSqKm) {
+    public void setAreaInSqKm(String areaInSqKm) {
         AreaInSqKm = areaInSqKm;
     }
 
-    public Double getDensityPerSqKm() {
+    public String getDensityPerSqKm() {
         return DensityPerSqKm;
     }
 
-    public void setDensityPerSqKm(Double densityPerSqKm) {
+    public void setDensityPerSqKm(String densityPerSqKm) {
         DensityPerSqKm = densityPerSqKm;
     }
 
@@ -52,9 +52,9 @@ public class CSVStatesCensus {
     public String toString() {
         return "CSVStatesCensus{" +
                 "State='" + State + '\'' +
-                ", Population=" + Population +
-                ", AreaInSqKm=" + AreaInSqKm +
-                ", DensityPerSqKm=" + DensityPerSqKm +
+                ", Population='" + Population + '\'' +
+                ", AreaInSqKm='" + AreaInSqKm + '\'' +
+                ", DensityPerSqKm='" + DensityPerSqKm + '\'' +
                 '}'+"\n";
     }
 }
