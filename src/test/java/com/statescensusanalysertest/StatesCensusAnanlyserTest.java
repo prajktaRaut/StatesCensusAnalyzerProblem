@@ -20,7 +20,7 @@ public class StatesCensusAnanlyserTest
 
     private static final String SAMPLE_CSV_FILE_PATH = "/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCode.csv";
 
-    private static final String SAMPLE_CSV_States_Census_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData1.csv";
+    private static final String SAMPLE_CSV_States_Census_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
 
     @Test
     public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException

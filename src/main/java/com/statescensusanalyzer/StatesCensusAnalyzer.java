@@ -18,7 +18,7 @@ public class StatesCensusAnalyzer {
 
     String SAMPLE_GSON_STATES_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByState.json";
     String SAMPLE_GSON_POPULATION_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByPopulations.json";
-
+    String SAMPLE_GSON_DENSITY_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByDensity.json";
 
     public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH) throws CSVFileException {
 
@@ -51,6 +51,8 @@ public class StatesCensusAnalyzer {
             writeToJson(list,SAMPLE_GSON_STATES_FILE_PATH);
             sortPopulationsValueInDescendingOrder(list);
             writeToJson(list,SAMPLE_GSON_POPULATION_FILE_PATH);
+            sortDensityValueInDescendingOrder(list);
+            writeToJson(list,SAMPLE_GSON_DENSITY_FILE_PATH);
 
 
         }
@@ -81,7 +83,7 @@ public class StatesCensusAnalyzer {
     {
         Comparator<CSVStatesCensus> comparator=Comparator.comparing(CSVStatesCensus::getState);
         list.sort(comparator);
-        System.out.println(list.toString());
+
 
     }
 
@@ -91,8 +93,16 @@ public class StatesCensusAnalyzer {
         Comparator<CSVStatesCensus> c = (s1, s2) -> Integer.parseInt(s2.getPopulation()) - Integer.parseInt(s1.getPopulation());
         list.sort(c);
 
+    }
+
+    public void sortDensityValueInDescendingOrder(List<CSVStatesCensus> list)
+    {
+        int count=0;
+        Comparator<CSVStatesCensus> c = (s1, s2) -> Integer.parseInt(s2.getDensityPerSqKm()) - Integer.parseInt(s1.getDensityPerSqKm());
+        list.sort(c);
 
     }
+
 
     public void writeToJson(List<CSVStatesCensus> statesCensusList,String SAMPLE_FILE_PATH) throws IOException {
         Gson gson=new Gson();
