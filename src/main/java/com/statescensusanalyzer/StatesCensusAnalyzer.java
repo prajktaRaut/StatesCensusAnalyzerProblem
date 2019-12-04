@@ -7,21 +7,21 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.*;
 
 
-public class StatesCensusAnalyzer {
+public class StatesCensusAnalyzer <T extends Comparable> {
 
 
-    String SAMPLE_GSON_STATES_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByState.json";
-    String SAMPLE_GSON_POPULATION_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByPopulations.json";
-    String SAMPLE_GSON_DENSITY_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByDensity.json";
-    String SAMPLE_GSON_AREA_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByArea.json";
+    String SAMPLE_GSON_File_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/SortedDataByState.json";
 
-    public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH) throws CSVFileException {
+
+    public int checkNumberOfRecordsForCSVStates(String SAMPLE_CSV_FILE_PATH, String methodName) throws CSVFileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
         int count = 0;
 
@@ -48,14 +48,12 @@ public class StatesCensusAnalyzer {
                 list.add(csvStatesCensus);
 
             }
-            sortBYStatesName(list);
-            writeToJson(list,SAMPLE_GSON_STATES_FILE_PATH);
-            sortPopulationsValueInDescendingOrder(list);
-            writeToJson(list,SAMPLE_GSON_POPULATION_FILE_PATH);
-            sortDensityValueInDescendingOrder(list);
-            writeToJson(list,SAMPLE_GSON_DENSITY_FILE_PATH);
-            sortAreaValueInDescendingOrder(list);
-            writeToJson(list,SAMPLE_GSON_AREA_FILE_PATH);
+
+
+            genericSortMethod(list,methodName);
+            writeToJson(list,SAMPLE_GSON_File_PATH);
+
+
 
 
         }
@@ -123,8 +121,54 @@ public class StatesCensusAnalyzer {
     }
 
 
+    public void sort(List<CSVStatesCensus> list) throws IOException {
 
+        for (int i=0;i<list.size()-1;i++)
+        {
+            for (int j=0;j<list.size()-i-1;j++)
+            {
+                if (list.get(j).getState().compareTo(list.get(j+1).getState())>0)
+                {
 
+                    CSVStatesCensus temp=list.get(j);
+                    list.set(j,list.get(j+1));
+                    list.set(j+1,temp);
+
+                }
+
+            }
+
+        }
+
+        writeToJson(list,SAMPLE_GSON_File_PATH);
+
+    }
+
+    public void genericSortMethod(List<CSVStatesCensus> list, String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        for (int i=0;i<list.size()-1;i++)
+        {
+            for (int j=0;j<list.size()-i-1;j++)
+            {
+
+                Class newClass1=list.get(j).getClass();
+                Method callMethod=newClass1.getDeclaredMethod(methodName);
+                T value1= (T) callMethod.invoke(list.get(j));
+
+                Class newClass2=list.get(j+1).getClass();
+                Method method=newClass2.getDeclaredMethod(methodName);
+                T value2= (T) method.invoke(list.get(j+1));
+
+                if (value1.compareTo(value2)<0)
+                {
+                    CSVStatesCensus temp=list.get(j);
+                    list.set(j,list.get(j+1));
+                    list.set(j+1,temp);
+
+                }
+            }
+        }
+    }
 
 }
 
