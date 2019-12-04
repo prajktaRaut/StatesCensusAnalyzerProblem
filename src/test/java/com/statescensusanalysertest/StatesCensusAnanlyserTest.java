@@ -23,20 +23,18 @@ public class StatesCensusAnanlyserTest
 
     private static final String SAMPLE_CSV_States_Census_FILE_PATH="/home/admin1/Documents/StatesCensusAnalyzer/src/test/resources/StateCensusData.csv";
 
-    /*@Test
-    public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException
-    {
+    @Test
+    public void givenMethod_CheckNumberOfRecordesMatchesOrNot_ShouldReturnTrue() throws CSVFileException, IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
-        int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+        int value=statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH,null);
         Assert.assertEquals(37,value);
     }
 
     @Test
-    public void givenMethod_ifFoundIncorrectFileName_ShouldThrowException() throws IOException
-    {
+    public void givenMethod_ifFoundIncorrectFileName_ShouldThrowException() throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH,null);
             Assert.assertEquals(37, value);
 
         }
@@ -48,11 +46,10 @@ public class StatesCensusAnanlyserTest
     }
 
     @Test
-    public void givenMethod_ifFoundIncorrectFileType_ShouldThrowException() throws IOException
-    {
+    public void givenMethod_ifFoundIncorrectFileType_ShouldThrowException() throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         try
         {
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH,null);
             Assert.assertEquals(37, value);
 
         }
@@ -65,11 +62,10 @@ public class StatesCensusAnanlyserTest
     }
 
     @Test
-    public void givenMethod_ifFoundIncorrectDelimiterPosition_ShouldReturnException() throws IOException,CSVFileException
-    {
+    public void givenMethod_ifFoundIncorrectDelimiterPosition_ShouldReturnException() throws IOException, CSVFileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH,null);
             Assert.assertEquals(37, value);
         }
         catch (CSVFileException e)
@@ -81,11 +77,10 @@ public class StatesCensusAnanlyserTest
     }
 
     @Test
-    public void givenMethod_ifFoundIncorrectHeader_ShouldReturnException()
-    {
+    public void givenMethod_ifFoundIncorrectHeader_ShouldReturnException() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         try {
 
-            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH);
+            int value = statesCensusAnalyzer.checkNumberOfRecordsForCSVStates(SAMPLE_CSV_FILE_PATH,null);
             Assert.assertEquals(37, value);
         }
         catch (CSVFileException e)
@@ -95,7 +90,6 @@ public class StatesCensusAnanlyserTest
         }
 
     }
-*/
 
     @Test
     public void givenMethod_SortDataByStateName_ShouldReturnSortCountEqualsOrNot() throws CSVFileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {

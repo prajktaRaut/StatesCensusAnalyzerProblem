@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T13:58:45" hostname="admin1-desktop" time="0.12">
+<testsuite name="com.statescensusanalysertest.StatesCensusAnanlyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-04T14:06:04" hostname="admin1-desktop" time="0.119">
   <properties/>
-  <testcase name="givenMethod_SortDataByArea_ShouldReturnSortCountEqualsOrNot" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.12"/>
+  <testcase name="givenMethod_SortDataByArea_ShouldReturnSortCountEqualsOrNot" classname="com.statescensusanalysertest.StatesCensusAnanlyserTest" time="0.119"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
